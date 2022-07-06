@@ -17,12 +17,14 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
+    // 조회
     @RequestMapping("/list")
     @ResponseBody
     public List<Article> articles() {
         return articleRepository.findAll();
     }
 
+    // 단건 조회
     @RequestMapping("detail")
     @ResponseBody
     public Article article(@RequestParam long id) {
@@ -30,9 +32,10 @@ public class ArticleController {
         return article.orElse(null); // article id 값이 없으면 null 반환
     }
 
+    // 수정
     @RequestMapping("doModify")
     @ResponseBody
-    public Article showModify(@RequestParam long id, String title, String body) {
+    public Article doModify(@RequestParam long id, String title, String body) {
         Article article = articleRepository.findById(id).get();
 
         if(title != null) {
@@ -46,5 +49,15 @@ public class ArticleController {
         articleRepository.save(article);
 
         return article;
+    }
+
+    // 삭제
+    @RequestMapping("doDelete")
+    @ResponseBody
+    public String doDelete(@RequestParam long id) {
+
+        articleRepository.deleteById(id);
+
+        return String.format("%d번 게시물이 삭제되었습니다.", id);
     }
 }
