@@ -29,4 +29,22 @@ public class ArticleController {
         Optional<Article> article = articleRepository.findById(id);
         return article.orElse(null); // article id 값이 없으면 null 반환
     }
+
+    @RequestMapping("doModify")
+    @ResponseBody
+    public Article showModify(@RequestParam long id, String title, String body) {
+        Article article = articleRepository.findById(id).get();
+
+        if(title != null) {
+            article.setTitle(title);
+        }
+
+        if(body != null){
+            article.setBody(body);
+        }
+
+        articleRepository.save(article);
+
+        return article;
+    }
 }
