@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping("/list")
+    @RequestMapping("/users")
     @ResponseBody
     public List<User> users() {
         return userRepository.findAll();
