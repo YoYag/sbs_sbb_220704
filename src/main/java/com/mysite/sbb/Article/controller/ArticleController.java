@@ -5,6 +5,7 @@ import com.mysite.sbb.Article.domain.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class ArticleController {
 
     @RequestMapping("detail")
     @ResponseBody
-    public Article article() {
-        Optional<Article> article = articleRepository.findById(1L);
-        return article.get();
+    public Article article(@RequestParam long id) {
+        Optional<Article> article = articleRepository.findById(id);
+        return article.orElse(null); // article id 값이 없으면 null 반환
     }
 }
