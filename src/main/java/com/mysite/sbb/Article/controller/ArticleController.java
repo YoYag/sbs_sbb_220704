@@ -21,14 +21,20 @@ public class ArticleController {
     // 조회
     @RequestMapping("/list")
     @ResponseBody
-    public List<Article> articles() {
+    public List<Article> showArticles(String title, String body) {
+        List<Article> articles;
+        if(title != null || body != null) {
+            articles = articleRepository.findByTitleOrBody(title, body);
+            return articles;
+        }
+
         return articleRepository.findAll();
     }
 
     // 단건 조회
     @RequestMapping("detail")
     @ResponseBody
-    public Article article(@RequestParam long id) {
+    public Article showArticle(@RequestParam long id) {
         Optional<Article> article = articleRepository.findById(id);
         return article.orElse(null); // article id 값이 없으면 null 반환
     }
@@ -64,13 +70,5 @@ public class ArticleController {
             return String.format("%d번 게시물이 삭제되었습니다.", id);
         }
         return String.format("이미 삭제되었거나 없는 게시물입니다.");
-    }
-
-    // 검색
-    @RequestMapping("findByTitle")
-    @ResponseBody
-    public List<Article> findByTitle(String title) {
-        List<Article> articles = articleRepository.findByTitle(title);
-        return articles;
     }
 }

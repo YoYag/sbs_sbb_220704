@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findByTitle(String title);
+
+    List<Article> findByBody(String body);
+
+    List<Article> findByTitleOrBody(String title, String body);
 }
