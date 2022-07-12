@@ -65,4 +65,12 @@ public class ArticleController {
         }
         return String.format("이미 삭제되었거나 없는 게시물입니다.");
     }
+
+    // 검색
+    @RequestMapping("findByTitle")
+    @ResponseBody
+    public List<Article> findByTitle(String title) {
+        List<Article> articles = articleRepository.findByTitle(title);
+        return articles;
+    }
 }
