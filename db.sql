@@ -92,6 +92,30 @@ SET create_date = NOW(),
 `subject` = '질문 3',
 `content` = '질문내용 3';
 
+# 답변 테이블 생성
+CREATE TABLE Answer (
+    id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    content TEXT NOT NULL,
+    create_date DATETIME NOT NULL,
+    question_id INT(11) UNSIGNED NOT NULL
+);
+
+# 답변데이터 생성
+INSERT INTO Answer SET
+create_date = NOW(),
+content = '답변내용 1',
+question_id = 1;
+
+INSERT INTO Answer SET
+create_date = NOW(),
+content = '답변내용 2',
+question_id = 2;
+
+INSERT INTO Answer SET
+create_date = NOW(),
+content = '답변내용 3',
+question_id = 3;
+
 SELECT * FROM `user`;
 SELECT * FROM `article`;
 SELECT * FROM `question`;
