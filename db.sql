@@ -70,7 +70,7 @@ title = '제목 3',
 
 # 질문 테이블 생성
 CREATE TABLE `question` (
-    id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     create_date DATETIME NOT NULL,
     `subject` VARCHAR(200) NOT NULL,
     `content` TEXT NOT NULL
@@ -93,7 +93,7 @@ SET create_date = NOW(),
 `content` = '질문내용 3';
 
 # 답변 테이블 생성
-CREATE TABLE Answer (
+CREATE TABLE answer (
     id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     content TEXT NOT NULL,
     create_date DATETIME NOT NULL,
@@ -101,17 +101,17 @@ CREATE TABLE Answer (
 );
 
 # 답변데이터 생성
-INSERT INTO Answer SET
+INSERT INTO answer SET
 create_date = NOW(),
 content = '답변내용 1',
 question_id = 1;
 
-INSERT INTO Answer SET
+INSERT INTO answer SET
 create_date = NOW(),
 content = '답변내용 2',
 question_id = 2;
 
-INSERT INTO Answer SET
+INSERT INTO answer SET
 create_date = NOW(),
 content = '답변내용 3',
 question_id = 3;
@@ -119,3 +119,4 @@ question_id = 3;
 SELECT * FROM `user`;
 SELECT * FROM `article`;
 SELECT * FROM `question`;
+SELECT * FROM `answer`;
