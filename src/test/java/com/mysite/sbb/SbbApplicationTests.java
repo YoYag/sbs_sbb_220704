@@ -1,13 +1,14 @@
 package com.mysite.sbb;
 
 
-import com.mysite.sbb.Answer.dao.AnswerRepository;
-import com.mysite.sbb.Answer.domain.Answer;
-import com.mysite.sbb.Qestion.dao.QuestionRepository;
-import com.mysite.sbb.Qestion.domain.Question;
+import com.mysite.sbb.answer.dao.AnswerRepository;
+import com.mysite.sbb.answer.domain.Answer;
+import com.mysite.sbb.question.dao.QuestionRepository;
+import com.mysite.sbb.question.domain.Question;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -79,4 +80,16 @@ class SbbApplicationTests {
 		assertEquals(2, a.getQuestion().getId());
 	}
 
+	@Transactional
+	@Test
+	void answerToQuestion() {
+		Optional<Question> oq = this.questionRepository.findById(2L);
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
+
+		List<Answer> answerList = q.getAnswerList();
+
+		assertEquals(2, answerList.size());
+		assertEquals("답변내용 2", answerList.get(0).getContent());
+	}
 }
