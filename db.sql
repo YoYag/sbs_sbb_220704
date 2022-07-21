@@ -4,37 +4,30 @@ CREATE DATABASE sbb;
 USE sbb;
 
 # 회원 테이블 생성
-CREATE TABLE `user` (
+CREATE TABLE `site_user` (
     id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    reg_date DATETIME NOT NULL,
-    update_date DATETIME NOT NULL,
-    email VARCHAR(100) NOT NULL,
+    `username` CHAR(50) NOT NULL UNIQUE KEY,
     `password` VARCHAR(150) NOT NULL,
-    `name` CHAR(50) NOT NULL
+    email VARCHAR(100) NOT NULL UNIQUE KEY
 );
 
+DESC site_user;
 
 # 회원데이터 생성
-INSERT INTO `user`
-SET reg_date = NOW(),
-update_date = NOW(),
-email = 'use1@test.com',
+INSERT INTO `site_user`
+SET `username` = '유저1',
 `password` = '1234',
-`name` = '유저1';
+email = 'use1@test.com';
 
-INSERT INTO `user`
-SET reg_date = NOW(),
-update_date = NOW(),
-email = 'use2@test.com',
+INSERT INTO `site_user`
+SET `username` = '유저2',
 `password` = '1234',
-`name` = '유저2';
+email = 'use2@test.com';
 
-INSERT INTO `user`
-SET reg_date = NOW(),
-update_date = NOW(),
-email = 'use3@test.com',
+INSERT INTO `site_user`
+SET `username` = '유저3',
 `password` = '1234',
-`name` = '유저3';
+email = 'use3@test.com';
 
 # 게시물 테이블 생성
 CREATE TABLE `article` (
@@ -43,7 +36,7 @@ CREATE TABLE `article` (
     update_date DATETIME NOT NULL,
     title VARCHAR(100) NOT NULL,
     `body` TEXT NOT NULL,
-    `user_id` BIGINT UNSIGNED NOT NULL
+    `site_user_id` BIGINT UNSIGNED NOT NULL
 );
 
 # 게시물데이터 생성
@@ -52,21 +45,21 @@ SET reg_date = NOW(),
 update_date = NOW(),
 title = '제목 1',
 `body` = '내용 1',
-`user_id` = 1;
+`site_user_id` = 1;
 
 INSERT INTO `article`
 SET reg_date = NOW(),
 update_date = NOW(),
 title = '제목 2',
 `body` = '내용 2',
-`user_id` = 2;
+`site_user_id` = 2;
 
 INSERT INTO `article`
 SET reg_date = NOW(),
 update_date = NOW(),
 title = '제목 3',
 `body` = '내용 3',
-`user_id` = 3;
+`site_user_id` = 3;
 
 # 질문 테이블 생성
 CREATE TABLE `question` (
@@ -116,7 +109,7 @@ create_date = NOW(),
 content = '답변내용 3',
 question_id = 3;
 
-SELECT * FROM `user`;
+SELECT * FROM `site_user`;
 SELECT * FROM `article`;
 SELECT * FROM `question`;
 SELECT * FROM `answer`;
