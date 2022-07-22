@@ -19,6 +19,7 @@ public class UserController {
 
     private final UserService userService;
 
+    // 회원가입
     @GetMapping("/signup")
     public String signup(UserCreateForm userCreateForm) {
         return "signup_form";
@@ -50,5 +51,11 @@ public class UserController {
         }
 
         return "redirect:/";
+    }
+
+    // 로그인
+    @GetMapping("/login")
+    public String login() {
+        return "login_form";
     }
 }
